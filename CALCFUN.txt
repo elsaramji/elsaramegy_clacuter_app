@@ -1,0 +1,100 @@
+ String opr = "";
+  String peropr = "";
+  double num1 = 0;
+  double num2 = 0;
+  String result = '';
+  String fnialresult = "";
+  String text = '';
+
+  ////////////
+  String sum() {
+    result = (num1 + num2).toString();
+    return result;
+  }
+
+  String sub() {
+    result = (num1 - num2).toString();
+    return result;
+  }
+
+  String mul() {
+    result = (num1 * num2).toString();
+    return result;
+  }
+
+  String div() {
+    result = (num1 / num2).toString();
+    return result;
+  }
+
+///////////////////////////////////////////////////////////////////////////////////
+  void clacutor(String Btext) {
+    if (Btext == "C" || Btext == "AC") {
+      setState(() {
+        num1 = 0;
+        num2 = 0;
+        result = "";
+        fnialresult = "";
+        text = '';
+      });
+    } else if (opr == '=' && Btext == '=') {
+      switch (peropr) {
+        case '+':
+          fnialresult = sum();
+          break;
+        case '-':
+          fnialresult = sub();
+
+          break;
+        case 'X':
+          fnialresult = mul();
+
+          break;
+        case '/':
+          fnialresult = div();
+
+          break;
+      }
+    } else if (Btext == '+' ||
+        Btext == '-' ||
+        Btext == '/' ||
+        Btext == 'X' ||
+        Btext == '=') {
+      if (num1 == 0) {
+        num1 = double.parse(result);
+      } else {
+        num2 = double.parse(result);
+      }
+
+      switch (opr) {
+        case '+':
+          fnialresult = sum();
+          break;
+        case '-':
+          fnialresult = sub();
+          break;
+        case 'X':
+          fnialresult = mul();
+          break;
+        case '/':
+          fnialresult = div();
+          break;
+      }
+      peropr = opr;
+      opr = Btext;
+      setState(() {
+        result = '';
+      });
+    } else {
+      result = result + Btext;
+      fnialresult = result;
+      setState(() {
+        //fnialresult = result;
+        text = fnialresult;
+      });
+    }
+    setState(() {
+      //fnialresult = result;
+      text = fnialresult;
+    });
+  }
